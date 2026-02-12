@@ -1,0 +1,248 @@
+game.StarterGui:SetCore("ResetButtonCallback", false)
+
+--[Variables]--
+local tweenService = game:GetService("TweenService")
+local marketplaceService = game:GetService("MarketplaceService")
+
+local mouse = game.Players.LocalPlayer:GetMouse()
+
+local gui = script.Parent
+
+local settingsBtn = gui.ButtonContainer:WaitForChild("SettingsButton")
+
+local settingsFrame = gui:WaitForChild("SettingsFrame")
+
+--[ZIndex]--
+gui.ButtonContainer.ZIndex = 2
+
+settingsBtn.ZIndex = 3
+
+settingsFrame.ZIndex = 10
+settingsFrame.BackButton.ZIndex = 11
+settingsFrame.SettingsScroller.ZIndex = 11
+
+for i, descendant in pairs(settingsFrame.SettingsScroller:GetDescendants()) do
+	if descendant:IsA("TextButton") or descendant:IsA("ImageButton") or descendant:IsA("Frame") or descendant:IsA("ImageLabel") or descendant:IsA("TextLabel") then
+		descendant.ZIndex = 11
+	end
+end
+
+--[Hover Button Effect]--
+for i, descendant in pairs(gui:GetDescendants()) do
+
+	if descendant:IsA("TextButton") or descendant:IsA("ImageButton") then
+
+		local originalSize = descendant.Size
+		local hoverSize = UDim2.new(originalSize.X.Scale * 1.01, 0, originalSize.Y.Scale * 1.01, 0)
+
+		descendant.MouseEnter:Connect(function()
+			if descendant ~= settingsBtn or not settingsOpen then
+				script.HoverSound:Play()
+				descendant:TweenSize(hoverSize, "InOut", "Quint", 0.2, true)
+			end
+		end)
+
+		descendant.MouseLeave:Connect(function()
+			descendant:TweenSize(originalSize, "InOut", "Quint", 0.2, true)
+		end)
+	end
+end
+
+
+--[Menu Buttons]--
+settingsFrame.Position = UDim2.new(-0.5, 0, 0.5, 0)
+settingsFrame.Visible = true
+
+local settingsOpen = false
+
+--Settings Button
+settingsBtn.MouseButton1Click:Connect(function()
+
+	if not settingsOpen then
+		settingsOpen = true
+		
+		settingsBtn.Active = false
+		settingsBtn.AutoButtonColor = false
+		settingsBtn.BackgroundTransparency = 0.5
+		settingsBtn.ImageTransparency = 0.5
+		
+		script.ClickSound:Play()
+
+		settingsFrame.Position = UDim2.new(-0.5, 0, 0.5, 0)
+		settingsFrame:TweenPosition(UDim2.new(0.5, 0, 0.5, 0), "Out", "Quint", 0.3, true)
+	end
+end)
+
+--Back Buttons
+settingsFrame.BackButton.MouseButton1Click:Connect(function()
+	settingsOpen = false
+	script.ClickSound:Play()
+
+	-- Settings butonunu tekrar aktif et
+	settingsBtn.Active = true
+	settingsBtn.AutoButtonColor = true
+	settingsBtn.BackgroundTransparency = 0
+	settingsBtn.ImageTransparency = 0
+
+	settingsFrame:TweenPosition(UDim2.new(-0.5, 0, 0.5, 0), "Out", "Quint", 0.3, true)
+end)
+
+
+--[SETTINGS]--
+local scroller = settingsFrame.SettingsScroller
+
+local sliderOff = UDim2.new(0.189, 0, 0.493, 0)
+local sliderOn = UDim2.new(0.806, 0, 0.493, 0)
+local sliderOffColor = Color3.fromRGB(114, 115, 118)
+local sliderOnColor = Color3.fromRGB(255, 255, 255)
+
+--Low Graphics Setting
+local lowGraphics = false
+local tweenInfoSlider = TweenInfo.new(0.2, Enum.EasingStyle.Quint, Enum.EasingDirection.InOut)
+
+scroller.LowGraphicsSetting.Slider.SliderCircle.Position = lowGraphics and sliderOn or sliderOff
+scroller.LowGraphicsSetting.Slider.SliderCircle.BackgroundColor3 = lowGraphics and sliderOnColor or sliderOffColor
+
+scroller.LowGraphicsSetting.Slider.MouseButton1Click:Connect(function()
+	lowGraphics = not lowGraphics
+	script.ClickSound:Play()
+
+	if lowGraphics then
+		scroller.LowGraphicsSetting.Slider.SliderCircle:TweenPosition(sliderOn, "InOut", "Quint", 0.2, true)
+
+		local colorTween = tweenService:Create(scroller.LowGraphicsSetting.Slider.SliderCircle, tweenInfoSlider, {BackgroundColor3 = sliderOnColor})
+		colorTween:Play()
+
+	else
+		scroller.LowGraphicsSetting.Slider.SliderCircle:TweenPosition(sliderOff, "InOut", "Quint", 0.2, true)
+
+		local colorTween = tweenService:Create(scroller.LowGraphicsSetting.Slider.SliderCircle, tweenInfoSlider, {BackgroundColor3 = sliderOffColor})
+		colorTween:Play()
+	end
+
+	for i, child in pairs(game.Lighting:GetChildren()) do
+
+		if child:IsA("BloomEffect") or child:IsA("DepthOfFieldEffect") or child:IsA("SunRaysEffect") or child:IsA("BlurEffect") or child:IsA("ColorCorrectionEffect") then
+			child.Enabled = not lowGraphics
+		end
+	end
+
+	game.Lighting.GlobalShadows = not lowGraphics
+end)
+
+--Textures Setting
+local textures = true
+
+scroller.TexturesSetting.Slider.SliderCircle.Position = textures and sliderOn or sliderOff
+scroller.TexturesSetting.Slider.SliderCircle.BackgroundColor3 = textures and sliderOnColor or sliderOffColor
+
+local texturesList = {}
+
+scroller.TexturesSetting.Slider.MouseButton1Click:Connect(function()
+	textures = not textures
+	script.ClickSound:Play()
+
+	if textures then
+		scroller.TexturesSetting.Slider.SliderCircle:TweenPosition(sliderOn, "InOut", "Quint", 0.2, true)
+
+		local colorTween = tweenService:Create(scroller.TexturesSetting.Slider.SliderCircle, tweenInfoSlider, {BackgroundColor3 = sliderOnColor})
+		colorTween:Play()
+
+	else
+		scroller.TexturesSetting.Slider.SliderCircle:TweenPosition(sliderOff, "InOut", "Quint", 0.2, true)
+
+		local colorTween = tweenService:Create(scroller.TexturesSetting.Slider.SliderCircle, tweenInfoSlider, {BackgroundColor3 = sliderOffColor})
+		colorTween:Play()
+	end
+
+	for i, descendant in pairs(workspace:GetDescendants()) do
+
+		if descendant:IsA("Texture") then
+
+			local originalTransparency = descendant.Transparency
+
+			if not texturesList[descendant] then
+				texturesList[descendant] = originalTransparency
+			end
+
+			descendant.Transparency = textures and texturesList[descendant] or 1
+		end
+	end
+end)
+
+--Chat Setting
+local noChat = false
+
+scroller.ChatSetting.Slider.SliderCircle.Position = noChat and sliderOn or sliderOff
+scroller.ChatSetting.Slider.SliderCircle.BackgroundColor3 = noChat and sliderOnColor or sliderOffColor
+
+scroller.ChatSetting.Slider.MouseButton1Click:Connect(function()
+	noChat = not noChat
+	script.ClickSound:Play()
+
+	if noChat then
+		scroller.ChatSetting.Slider.SliderCircle:TweenPosition(sliderOn, "InOut", "Quint", 0.2, true)
+
+		local colorTween = tweenService:Create(scroller.ChatSetting.Slider.SliderCircle, tweenInfoSlider, {BackgroundColor3 = sliderOnColor})
+		colorTween:Play()
+
+	else
+		scroller.ChatSetting.Slider.SliderCircle:TweenPosition(sliderOff, "InOut", "Quint", 0.2, true)
+
+		local colorTween = tweenService:Create(scroller.ChatSetting.Slider.SliderCircle, tweenInfoSlider, {BackgroundColor3 = sliderOffColor})
+		colorTween:Play()
+	end
+
+	game.StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.Chat, not noChat)
+end)
+
+--[MUSIC SETTING]--
+local musicMuted = false
+
+scroller.MusicSetting.Slider.SliderCircle.Position = musicMuted and sliderOn or sliderOff
+scroller.MusicSetting.Slider.SliderCircle.BackgroundColor3 = musicMuted and sliderOnColor or sliderOffColor
+
+local musicList = {}
+
+for i, sound in pairs(script:GetChildren()) do
+	if sound:IsA("Sound") and string.find(string.lower(sound.Name), "music") then
+		musicList[sound] = sound.Volume
+	end
+end
+
+scroller.MusicSetting.Slider.MouseButton1Click:Connect(function()
+	musicMuted = not musicMuted
+	script.ClickSound:Play()
+
+	if musicMuted then
+		scroller.MusicSetting.Slider.SliderCircle:TweenPosition(sliderOn, "InOut", "Quint", 0.2, true)
+		local colorTween = tweenService:Create(scroller.MusicSetting.Slider.SliderCircle, tweenInfoSlider, {BackgroundColor3 = sliderOnColor})
+		colorTween:Play()
+	else
+		scroller.MusicSetting.Slider.SliderCircle:TweenPosition(sliderOff, "InOut", "Quint", 0.2, true)
+		local colorTween = tweenService:Create(scroller.MusicSetting.Slider.SliderCircle, tweenInfoSlider, {BackgroundColor3 = sliderOffColor})
+		colorTween:Play()
+	end
+
+	for sound, originalVolume in pairs(musicList) do
+		if sound and sound.Parent then
+			sound.Volume = musicMuted and 0 or originalVolume
+		end
+	end
+end)
+
+--[AMBIANCE MUSIC]--
+local ambiance = Instance.new("Sound")
+ambiance.Name = "AmbianceMusic"
+ambiance.SoundId = "rbxassetid://120666688511685"
+ambiance.Volume = 0.4
+ambiance.Looped = true
+ambiance.Parent = gui
+
+if not musicList[ambiance] then
+	musicList[ambiance] = ambiance.Volume
+end
+
+ambiance:Play()
+
+settingsFrame:TweenPosition(UDim2.new(-0.5, 0, 0.5, 0), "Out", "Quint", 0, true)
