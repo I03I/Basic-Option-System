@@ -1,4 +1,3 @@
-game.StarterGui:SetCore("ResetButtonCallback", false)
 
 --[Variables]--
 local tweenService = game:GetService("TweenService")
@@ -244,5 +243,6 @@ if not musicList[ambiance] then
 end
 
 ambiance:Play()
+
 
 settingsFrame:TweenPosition(UDim2.new(-0.5, 0, 0.5, 0), "Out", "Quint", 0, true)
