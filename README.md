@@ -6,9 +6,7 @@
 
 
 
-\\##  Overview
-
-
+##  Overview
 
 A comprehensive, polished settings menu system for Roblox games featuring smooth animations, persistent preferences, and performance optimization tools.
 
@@ -17,92 +15,90 @@ A comprehensive, polished settings menu system for Roblox games featuring smooth
 
 
 
+## Features
 
-\\## Features
 
 
+- Low Graphics Mode - Disables bloom, depth of field, sun rays, blur effects, and global shadows for potato computers.
 
-\\- Low Graphics Mode - Disables bloom, depth of field, sun rays, blur effects, and global shadows for potato computers.
 
 
+- Texture Management - Dynamically removes textures to boost FPS on low-end devices.
 
-\\- Texture Management - Dynamically removes textures to boost FPS on low-end devices.
 
 
+- Chat Toggle - Hide chat functionality for parental control and streamers.
 
-\\- Chat Toggle - Hide chat functionality for parental control and streamers.
 
 
+- Music Mute - Independently mutes background music while keeping UI sound effects active.
 
-\\- Music Mute - Independently mutes background music while keeping UI sound effects active.
 
 
+- Smooth Animations - Tween-based hover effects (1.01x scale) with click feedback. (2px press)
 
-\\- Smooth Animations - Tween-based hover effects (1.01x scale) with click feedback. (2px press)
 
 
+- ZIndex Management - Proper layer hierarchy ensuring menus always display correctly.
 
-\\- ZIndex Management - Proper layer hierarchy ensuring menus always display correctly.
 
 
+- Sound Feedback - Satisfying hover and click sounds for all interactive elements.
 
-\\- Sound Feedback - Satisfying hover and click sounds for all interactive elements.
 
 
 
 
+## Architecture
 
-\\## Architecture
 
 
+- **Client-Side**: LocalScripts handling UI animations, user input, and local preference toggles.
 
-\\- \\\*\\\*Client-Side\\\*\\\*: LocalScripts handling UI animations, user input, and local preference toggles.
 
+- **Server-Side**: (Optional) DataStore integration for saving player settings across sessions.
 
 
-\\- \\\*\\\*Server-Side\\\*\\\*: (Optional) DataStore integration for saving player settings across sessions.
 
+- **Performance**: Optimized descendant scanning with instance caching for texture management.
 
 
-\\- \\\*\\\*Performance\\\*\\\*: Optimized descendant scanning with instance caching for texture management.
 
+- **Data**: DataStore integration for player preferences.
 
 
-\\- \\\*\\\*Data\\\*\\\*: DataStore integration for player preferences.
 
 
 
 
 
+## Installation
 
 
-\\## Installation
 
+1\. Clone this repository.
 
 
-1\\. Clone this repository.
 
+2\. Open the `.rbxl` file in Roblox Studio (demo file available in Releases).
 
 
-2\\. Open the `.rbxl` file in Roblox Studio (demo file available in Releases).
 
+3\. Import the MenuGui "ScreenGui" into StarterGui.
 
 
-3\\. Import the MenuGui "ScreenGui" into StarterGui.
 
+4\. Explore the script structure in `/src`.
 
 
-4\\. Explore the script structure in `/src`.
 
+5\. Run the game and access settings via the SettingsButton.
 
 
-5\\. Run the game and access settings via the SettingsButton.
 
 
 
-
-
-\\## Project Structure
+## Project Structure
 
 Workspace\\StarterGui/
 
@@ -142,11 +138,11 @@ MenuGui/
 
 
 
-\\## Demo
+## Demo
 
 
 
-\\\[Add YouTube video link here demonstrating the system]
+[[Demo Game link for demonstrating the system](https://www.roblox.com/games/132226618571993/Project-Portfolio)]
 
 
 
@@ -154,7 +150,7 @@ MenuGui/
 
 
 
-\\##Tech Stack
+## Tech Stack
 
 
 
@@ -162,15 +158,15 @@ MenuGui/
 
 
 
-\\\*\\\*Platform \\\& Language\\\*\\\*
+**Platform & Language**
 
 
 
-\\- Roblox Studio
+- Roblox Studio
 
 
 
-\\- Lua 5.1 (Roblox-flavored)
+- Lua 5.1 (Roblox-flavored)
 
 
 
@@ -178,23 +174,23 @@ MenuGui/
 
 
 
-\\\*\\\*Core Services\\\*\\\*
+**Core Services**
 
 
 
-\\- TweenService (Smooth UI animations)
+- TweenService (Smooth UI animations)
 
 
 
-\\- LightingService (Graphics management)
+- LightingService (Graphics management)
 
 
 
-\\- StarterGui (Core GUI controls)
+- StarterGui (Core GUI controls)
 
 
 
-\\- RunService (Heartbeat for animations)
+- RunService (Heartbeat for animations)
 
 
 
@@ -202,45 +198,45 @@ MenuGui/
 
 
 
-\\\*\\\*UI/UX Features\\\*\\\*
+**UI/UX Features**
 
 
 
-\\- Responsive hover scaling (1.01x)
+- Responsive hover scaling (1.01x)
 
 
 
-\\- Tactile click feedback (2px depression)
+- Tactile click feedback (2px depression)
 
 
 
-\\- Smooth slide toggles with color transitions
+- Smooth slide toggles with color transitions
 
 
 
-\\- Proper ZIndex layering
+- Proper ZIndex layering
 
 
 
-\\- Screen-relative positioning
+- Screen-relative positioning
 
 
 
 
 
-\\\*\\\*Additional Expertise\\\*\\\*
+**Additional Expertise**
 
 
 
-\\- Client-Server security models
+- Client-Server security models
 
 
 
-\\- Optimized DataStore usage patterns
+- Optimized DataStore usage patterns
 
 
 
-\\- Efficient networking strategies
+- Efficient networking strategies
 
 
 
@@ -248,7 +244,7 @@ MenuGui/
 
 
 
-\\## 📜 License
+## License
 
 
 
@@ -260,7 +256,7 @@ This portfolio project is licensed under the MIT License.
 
 
 
-\\\*\\\*Note:\\\*\\\* This is a demonstration project for portfolio purposes. The code is provided to showcase development skills.
+**Note:** This is a demonstration project for portfolio purposes. The code is provided to showcase development skills.
 
 
 
@@ -268,15 +264,15 @@ This portfolio project is licensed under the MIT License.
 
 
 
-\\# Author
+# Author
 
 
 
-\\\[I03I] - Portfolio Projects
+[I03I] - Portfolio Projects
 
 
 
-\\- Demo Video: \[Coming Soon]
+- Demo Video: \[Coming Soon]
 
-\\- Portfolio Contact: trafonbusiness.com
+- Portfolio Contact: trafonbusiness.com
 
